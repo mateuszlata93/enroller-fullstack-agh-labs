@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="addNewMeeting()">
+  <form @submit.prevent="addNewMeeting(newMeeting)">
     <h3>Dodaj nowe spotkanie</h3>
     <label>Nazwa</label>
     <input type="text" v-model="newMeeting.name">
@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -19,14 +21,15 @@ export default {
     };
   },
   methods: {
-    addNewMeeting() {
-      this.error = false;
+    addNewMeeting(newMeeting) {
       if (this.newMeeting.name) {
         this.$emit('added', this.newMeeting);
         this.newMeeting = {participants: []};
+        axios.post('/api/meetings', newMeeting)
       } else {
         this.error = true;
       }
+      this.error = false;
     }
   }
 }

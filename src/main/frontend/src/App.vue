@@ -27,11 +27,10 @@ import "milligram";
 import LoginForm from "./LoginForm";
 import UserPanel from "./UserPanel";
 import MeetingsPage from "./meetings/MeetingsPage";
-import RegistrationForm from "@/RegistrationForm";
 import axios from "axios";
 
 export default {
-  components: {RegistrationForm, LoginForm, MeetingsPage, UserPanel},
+  components: { LoginForm, MeetingsPage, UserPanel},
   data() {
     return {
       authenticatedUsername: '',
@@ -50,9 +49,13 @@ export default {
             console.log(token)
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 
-            axios.get('/api/meetings').then(response2 =>{
-              console.log("test")
-              console.log(response2.data);
+            axios.get('/api/meetings').then(response2 => {
+              console.log('here')
+              console.log(response2.data.forEach(meeting => console.log(meeting)));
+              MeetingsPage.meetings = [];
+              MeetingsPage.meetings.push(response2.data[0]);
+              console.log(MeetingsPage.meetings)
+            //  MeetingsPage.methods.addNewMeeting(response2.data[0])
             } );
 
           })
@@ -94,6 +97,8 @@ export default {
 }
 
 .alert-red {
+  font-weight: bold;
   background-color: red;
+  color: black;
 }
 </style>

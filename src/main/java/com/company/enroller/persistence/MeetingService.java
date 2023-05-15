@@ -52,6 +52,7 @@ public class MeetingService {
 
     public void add(Meeting meeting) {
         Transaction transaction = this.session.beginTransaction();
+        System.out.println("spotkanie " + meeting);
         this.session.save(meeting);
         transaction.commit();
     }

@@ -32,6 +32,7 @@ public class MeetingRestController {
         if (!participantLogin.isEmpty()) {
             foundParticipant = participantService.findByLogin(participantLogin);
         }
+        if (title.isEmpty() && description.isEmpty() && participantLogin.isEmpty()) return new ResponseEntity<Collection<Meeting>>(meetingService.getAll(), HttpStatus.OK);
         Collection<Meeting> meetings = meetingService.findMeetings(title, description, foundParticipant, sortMode);
         return new ResponseEntity<Collection<Meeting>>(meetings, HttpStatus.OK);
     }

@@ -14,6 +14,7 @@
 <script>
 import NewMeetingForm from "./NewMeetingForm";
 import MeetingsList from "./MeetingsList";
+import axios from "axios";
 
 export default {
   components: {NewMeetingForm, MeetingsList},
@@ -35,6 +36,8 @@ export default {
     },
     deleteMeeting(meeting) {
       this.meetings.splice(this.meetings.indexOf(meeting), 1);
+      axios.post('/api/meetings', newMeeting)
+
     },
   }
 }
