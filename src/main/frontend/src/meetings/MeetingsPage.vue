@@ -36,8 +36,7 @@ export default {
     },
     deleteMeeting(meeting) {
       this.meetings.splice(this.meetings.indexOf(meeting), 1);
-      axios.post('/api/meetings', newMeeting)
-
+      axios.delete('/api/meetings/' + this.meetings.indexOf(meeting), meeting)
     },
   }
 }
